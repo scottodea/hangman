@@ -1,12 +1,12 @@
 require 'faker'
 
-class Word(category)
+class Word
     def initialize
-        @category = category
+        @answer = ""
     end
 
-    def category
-        puts "Hey #{@name}! Welcome to hangman!"
+    def pick_category(name)
+        puts "Hey #{name}! Welcome to hangman!"
         puts "Pick a category:"
         puts "1. Starwars"
         puts "2. Pokemon"
@@ -26,31 +26,20 @@ class Word(category)
         when @answer == "5"
         @answer = Faker::Simpsons.character
         end
+        puts @answer
         @answer.upcase!
         #↓↓↓↓↓↓ We will remove the line below when finished -- Just to help see answer while working
-        puts @answer
     end
-    
-    def word
-        @hidden_word = @answer.chars.count
-        @hidden_word = "_ " * @hidden_word.to_i
+
+    def show_hidden_word
+        hidden_word = @answer.chars.count
+        hidden_word = "_ " * hidden_word.to_i
         # system('clear')-- implement later for cleaner app
-        puts @hidden_word
-    end
-    # while @lives > 0
-    def guess
-        puts "Please enter a letter guess: "
-        loop do
-            @guess = gets.chomp.upcase!
-            if @guess.chars.count > 1
-                puts "Only one character please!"
-            #↓↓↓↓FIX_ME guess.to_i > 0 only works if they don't input 0. Using for now until better solution
-            elsif @guess.to_i > 0
-                puts "Only letters please!"
-            else 
-                #↓↓↓↓ takes us out of loop
-                break
-            end
-        end
+        puts hidden_word
     end
 end
+
+# word = Word.new
+# word.pick_category("Gino")
+# word.show_hidden_word
+# word.guess
