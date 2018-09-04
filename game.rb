@@ -12,10 +12,10 @@ require_relative 'word'
 ###                          Fix harry potter
 
 ## To Fix
-# - handling entering a letter multiple times
-# - listing previous wrong guesses 
-# - you lose message
-# - exit the game when player loses/wins
+# - handling entering a correct letter multiple times
+# - when entering a guess caps lock causes error
+# - when faker produces a name with punctuationl remove punctuation from the "answer"
+# - not allow non-alphabetical characters to be guessed (regex)
 
 class Game
     attr_accessor :name, :answer
@@ -65,6 +65,11 @@ class Game
     def guess
         hangman = Hangman.new
         while @mistakes < 6 do 
+            # if @wrong_letters == []
+            if @wrong_letters.length > 0
+                print "Wrong guesses: #{@wrong_letters}"
+                puts
+            end
             puts "Please enter a letter guess: "
             loop do
                 @guess = gets.chomp.upcase!
@@ -73,17 +78,14 @@ class Game
                 #↓↓↓↓FIX_ME guess.to_i > 0 only works if they don't input 0. Using for now better solution
                 elsif @guess.to_i > 0
                     puts "Only letters please!"
+                elsif @wrong_letters.count(@guess) == 1
+                    puts "You have already guessed this letter. Please guess again:"
                 else 
                     #↓↓↓↓ takes us out of loop
                     break
                 end
             end
             # check guess
-            if @wrong_letters == []
-
-            else print "Letters used #{@wrong_letters}"
-                puts
-            end
             if @answer.chars.include?(@guess)
                 puts "You got a letter!"
                 puts
