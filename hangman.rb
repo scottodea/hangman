@@ -5,6 +5,11 @@ class Hangman
 
     def draw(mistakes)
         if mistakes == 1
+            i = 0
+            while i < 6 do
+                puts ''
+                i += 1
+            end
             puts '  _______'
         elsif mistakes == 2
             i = 0
@@ -52,5 +57,5 @@ class Hangman
     end
 end
 
-hangman = Hangman.new
-hangman.draw(6)
+# hangman = Hangman.new
+# hangman.draw(6)
