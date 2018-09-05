@@ -39,6 +39,29 @@ Functionality
 ### Trello Board:
 ![Trello board](https://github.com/ginodleon/hangman/blob/master/docs/Trello_board.jpg)
 
+### Screenshots:
+- Welcome screen
+![Enter name](https://github.com/ginodleon/hangman/blob/master/docs/2enter_name.png)
+
+- Category selection
+![Pick a category](https://github.com/ginodleon/hangman/blob/master/docs/3category.png)
+
+- Guessing a character
+![Enter a guess](https://github.com/ginodleon/hangman/blob/master/docs/4guess.png)
+
+- Correct guess screen
+![Correct guess](https://github.com/ginodleon/hangman/blob/master/docs/5correct.png)
+
+- Incorrect guess screen
+![Incorrect guess](https://github.com/ginodleon/hangman/blob/master/docs/6wrong.png)
+
+- Winning screen
+![Win screen](https://github.com/ginodleon/hangman/blob/master/docs/7win.png)
+
+- Gameover screen
+![Lose screen](https://github.com/ginodleon/hangman/blob/master/docs/8lose.png)
+
+
 
 
 
