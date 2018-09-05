@@ -47,7 +47,7 @@ class Word
             end
         end
         @answer = trim_array.join
-        puts @answer
+        # puts @answer
         @answer.upcase!
     end
 

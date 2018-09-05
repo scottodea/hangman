@@ -135,7 +135,11 @@ class Game
                 if @progress_array.length == 0
                     puts @hidden_word
                 else
-                    @progress_array = @array
+                    # print "@progress array is: #{@progress_array}"
+                    # puts
+                    # print "@array is: #{@array}"
+                    # puts
+                    # @progress_array = @array
                     @progress_string = @progress_array.join(",").delete(",")    
                     i = 0
                     while i < @progress_string.length do
@@ -145,7 +149,6 @@ class Game
                 end
                 puts
                 hangman.draw(@mistakes)
-
                 puts
                 if @mistakes == 6
                     puts "The answer was #{@answer}"
@@ -154,9 +157,8 @@ class Game
             end
             # player wins once progress_array does not contain an underscore
             # and prevents them from winning upon initialization
-            if @progress_array.include?("_") == false and @progress_array.include?("_ ") == false and @progress_array != []
+            if @progress_array.include?("_") == false and @progress_array != []
                 system('clear')
-                print "progress array: #{@progress_array.inspect}"
                 print "The word was: "
                 @progress_string = @progress_array.join(",").delete(",")    
                 i = 0
