@@ -22,18 +22,23 @@ class Word
             case @answer.strip
             when "1"
                 @answer = Faker::StarWars.character
+                system('afplay starwars.wav')
                 break
             when "2"
                 @answer = Faker::Pokemon.name
+                system('afplay pokemon.wav')
                 break
             when "3"
                 @answer = Faker::DragonBall.character
+                system('afplay dragonball.wav')
                 break
             when "4"
                 @answer = Faker::HarryPotter.character
+                system('afplay harrypotter.wav')
                 break
             when "5"
                 @answer = Faker::Simpsons.character
+                system('afplay simpsons.wav')
                 break
             else
                 puts "Please enter a number from 1 to 5"

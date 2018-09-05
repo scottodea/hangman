@@ -26,7 +26,7 @@ class Game
         puts'       \/      \/     \//_____/       \/     \/     \/'.colorize(:red)
         system ('afplay Start1.wav')
         puts"Press enter to start or any key to quit"
-        system ('afplay angrywelcome.wav')
+        system ('afplay welcome.wav')
         response = gets
         # if enter is pressed start game otherwise exit on any other keypress
         if response == "\n"
@@ -40,7 +40,7 @@ class Game
     # welcome method to get user's name
     def welcome
         puts "Name please: "
-        system('afplay angrywhatshanging.wav')
+        system('afplay whatshanging.wav')
         while @name = gets.chomp
             system('clear')
             if @name.strip == ""
@@ -185,7 +185,7 @@ class Game
                 puts
                 puts
                 system ('afplay win.wav')
-                break
+                break                
             end
         end
     end
