@@ -1,6 +1,6 @@
 ## hangman
 Hangman terminal game
-github link -- https://github.com/ginodleon/hangman
+github link -- https://github.com/scottodea/hangman
 
 ### Description of our terminal application
 Purpose
