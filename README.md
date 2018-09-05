@@ -2,7 +2,7 @@
 Hangman terminal game
 github link -- https://github.com/ginodleon/hangman
 
-Description of our terminal application
+### Description of our terminal application
 Purpose
 - The purpose of our terminal app is to provide an entertaining and interactive version of the classic hangman game.
 - This game is designed to appeal to game-lovers of any age, and we implemented 5 different categories to choose from
@@ -20,7 +20,7 @@ Functionality
 - Music in the game is accessed using the "system ('afplay)" command
 
 
-## Instructions for use
+### Instructions for use
 -Clone Git repository from provided link
 -Open Terminal
 -type 'gem install colorize'(if you don't already have it)
@@ -33,7 +33,7 @@ Functionality
 -Follow commands given by the game
 -Enjoy!
 
-## User Flowchart:
+### User Flowchart:
 ![User Flowchart](https://github.com/ginodleon/hangman/blob/master/docs/flowchart.jpg)
 
 
