@@ -24,9 +24,9 @@ Functionality
 1. Clone Git repository from provided link
 2. Open Terminal
 3. Type 'gem install colorize'(if you don't already have it)
-   hit enter - terminal will install colorize gem
+  hit enter - terminal will install colorize gem
 4. Type 'gem install faker'(if you don't already have it)
-   hit enter - terminal will install faker gem
+  hit enter - terminal will install faker gem
 5. Navigate to directory containing cloned git repository
 6. Type "ruby game.rb"
 7. Game will begin
