@@ -1,4 +1,4 @@
-# hangman
+## hangman
 Hangman terminal game
 github link -- https://github.com/ginodleon/hangman
 
@@ -20,7 +20,7 @@ Functionality
 - Music in the game is accessed using the "system ('afplay)" command
 
 
-Instructions for use
+## Instructions for use
 -Clone Git repository from provided link
 -Open Terminal
 -type 'gem install colorize'(if you don't already have it)
@@ -32,6 +32,9 @@ Instructions for use
 -Game will begin
 -Follow commands given by the game
 -Enjoy!
+
+## User Flowchart:
+![User Flowchart](https://github.com/ginodleon/hangman/blob/master/docs/flowchart.jpg)
 
 
 
