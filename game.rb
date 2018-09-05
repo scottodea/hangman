@@ -2,23 +2,8 @@ require 'colorize'
 require_relative 'hangman'
 require_relative 'word'
 
-###  NOTES Talk with Gino -- Do we get rid of spaces in answer?
-###                          Do we remove punctuation from answer?
-###                          Some People include numbers (ex. Android 20) - delete line 97?
-###                          Explain check_guess logic
-###                          Only works for one runthrough
-###                          Need to implement classes further
-###                          Need to show wrong letters
-###                          Fix harry potter
-
-## To Fix
-# - handling entering a correct letter multiple times
-# - when entering a guess caps lock causes error
-# - when faker produces a name with punctuationl remove punctuation from the "answer"
-# - not allow non-alphabetical characters to be guessed (regex)
-
 class Game
-    attr_accessor :name, :answer
+    attr_accessor :name, :answer, :hidden_word
 
     def initialize
         @mistakes = 0
@@ -28,6 +13,7 @@ class Game
         @name = ""
         @guess = ''
         @wrong_letters = []
+        @hidden_word = ""
     end
 
     def start_game
@@ -56,55 +42,74 @@ class Game
     def welcome
         puts "Hey, What's Hangin?"
         puts "Name please: "
-        @name = gets.chomp
-        @name.capitalize!
+        while @name = gets.chomp
+            system('clear')
+            if @name.strip == ""
+                puts "Please enter a name:"
+            else
+                break
+            end
+        end
+        # if name starts with a number, do not capitalize it
+        if @name.capitalize! == nil   
+            @name.strip!
+        else
+            @name.capitalize!
+            @name.strip!
+        end
         system('clear')
     end
 
-    # while @lives > 0
     def guess
         hangman = Hangman.new
         while @mistakes < 6 do 
-            # if @wrong_letters == []
             if @wrong_letters.length > 0
-                print "Wrong guesses: #{@wrong_letters}"
-                puts
+                print "Wrong guesses: #{@wrong_letters.join(', ')}"
             end
-            puts "Please enter a letter guess: "
+            puts
+            puts "Please enter a letter or single digit: "
             loop do
-                @guess = gets.chomp.upcase!
-                if @guess.chars.count > 1
-                    puts "Only one character please!"
-                #↓↓↓↓FIX_ME guess.to_i > 0 only works if they don't input 0. Using for now better solution
-                elsif @guess.to_i > 0
-                    puts "Only letters please!"
+                @guess = gets.chomp
+                if @guess.is_a? String     
+                    @guess.upcase!
+                end
+
+                if @guess == ""
+                    puts "You didn't enter anything. Try again:"
+                elsif !@guess.match(/\A[a-zA-Z0-9]*\z/)
+                    puts "Please only enter a letter or number. Try again:"
+                elsif @guess.chars.count > 1
+                    puts "Only one character please! Please guess again:"
                 elsif @wrong_letters.count(@guess) == 1
                     puts "You have already guessed this letter. Please guess again:"
+                elsif @progress_array.count(@guess) > 0
+                    puts "You have already correctly guessed this letter. Please guess again:"
                 else 
-                    #↓↓↓↓ takes us out of loop
                     break
                 end
             end
             # check guess
             if @answer.chars.include?(@guess)
+                system('clear')
                 puts "You got a letter!"
                 puts
-                #↓↓↓ turns answer into @array
-                # check if progress has been made
+                # convert the answer into a char array. place the correct guess in it's corresponding spot
+                # and replace all un-guessed chars with an underscore
+                # if there is a space do not put an underscore
                 @array = @answer.chars
-                #↓↓↓ checks each element of @array, if guess matches element it remains, otherwise replaced with _
                 @array = @array.map do |element|
                     if element == @guess
                         "#{@guess}"
+                    elsif element == " "
+                        " "
                     else
                         "_"
                     end
-                end    
-                    ###### if progress_array contains a partial answer, update progress_array with new correct guesses 
+                end     
                 if @progress_array.length == 0
                     @progress_array = @array                    
                 else
-                    # update array with new correct guess
+                    # update guess_array with new correct guess
                     guess_array = @array.each_index.select { |index| @array[index] == @guess}
                     guess_array.each do |index|
                         @progress_array.delete_at(index)
@@ -121,16 +126,55 @@ class Game
                     i += 1                
                 end
                 puts
-            else
-                puts "Uh-oh, hangman just got one stage closer:"
-                @mistakes += 1
-                #draw Hangman
                 hangman.draw(@mistakes)
+            else
+                system('clear')
+                puts "Uh-oh, hangman just got one stage closer:"
+                puts
+                @mistakes += 1
+                if @progress_array.length == 0
+                    puts @hidden_word
+                else
+                    @progress_array = @array
+                    @progress_string = @progress_array.join(",").delete(",")    
+                    i = 0
+                    while i < @progress_string.length do
+                        print "#{@progress_string[i]} "
+                        i += 1                
+                    end
+                end
+                puts
+                hangman.draw(@mistakes)
+
+                puts
+                if @mistakes == 6
+                    puts "The answer was #{@answer}"
+                end
                 @wrong_letters << @guess
             end
-
-            if @progress_array.include?("_") == false and @progress_array != []
-                puts "you win"
+            # player wins once progress_array does not contain an underscore
+            # and prevents them from winning upon initialization
+            if @progress_array.include?("_") == false and @progress_array.include?("_ ") == false and @progress_array != []
+                system('clear')
+                print "progress array: #{@progress_array.inspect}"
+                print "The word was: "
+                @progress_string = @progress_array.join(",").delete(",")    
+                i = 0
+                while i < @progress_string.length do
+                    print "#{@progress_string[i]} "
+                    i += 1                
+                end
+                puts
+                puts
+                puts
+                puts
+                puts'/\ \_\ \   /\  __ \   /\ \/\ \      /\ \  _ \ \   /\ \   /\ "-.\ \ '   
+                puts'\ \____ \  \ \ \/\ \  \ \ \_\ \     \ \ \/ ".\ \  \ \ \  \ \ \-.  \ ' 
+                puts' \/\_____\  \ \_____\  \ \_____\     \ \__/".~\_\  \ \_\  \ \_\"\_ \ '
+                puts'  \/_____/   \/_____/   \/_____/      \/_/   \/_/   \/_/   \/_/ \/_/   '
+                puts
+                puts
+                puts
                 break
             end
         end
@@ -142,7 +186,6 @@ word = Word.new
 
 new_game.start_game
 new_game.welcome
-
 new_game.answer = word.pick_category(new_game.name)
-word.show_hidden_word
+new_game.hidden_word = word.show_hidden_word
 new_game.guess
