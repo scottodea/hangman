@@ -36,7 +36,8 @@ Functionality
 ### User Flowchart:
 ![User Flowchart](https://github.com/ginodleon/hangman/blob/master/docs/flowchart.jpg)
 
-
+### Trello Board:
+![Trello board](https://github.com/ginodleon/hangman/blob/master/docs/Trello_board.jpg)
 
 
 
