@@ -1,3 +1,5 @@
+# class to handle the drawing of the Hangman graphic as the user makes more mistakes
+
 class Hangman
     def initialize
         @mistakes = 0

@@ -1,3 +1,6 @@
+# Word class handles the generation of a random word using the faker gem
+# formats the word to remove any unwanted punctuation and symbols
+
 require 'faker'
 
 class Word
@@ -13,6 +16,8 @@ class Word
         puts "3. Dragonball"            
         puts "4. Harry Potter"
         puts "5. Simpsons"
+        # while loop to ensure that user enters the right input
+        # generate random word using faker
         while @answer = gets.chomp
             case @answer.strip
             when "1"
@@ -39,7 +44,6 @@ class Word
         trim_array = []
         @answer.chars.each do |char|
             if !char.match(/\A[a-zA-Z0-9 ]*\z/)
-                #delete char
                 char = ''
                 trim_array.push(char)
             else
@@ -47,10 +51,10 @@ class Word
             end
         end
         @answer = trim_array.join
-        # puts @answer
         @answer.upcase!
     end
 
+    # convert the random word into a "hidden word" that replaces character swith underscores
     def show_hidden_word
         hidden_word = @answer.chars
         hidden_word = hidden_word.map do |element|

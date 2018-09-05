@@ -28,8 +28,8 @@ class Game
         puts"Press enter to start or any key to quit"
         system ('afplay angrywelcome.wav')
         response = gets
+        # if enter is pressed start game otherwise exit on any other keypress
         if response == "\n"
-            
         else 
             puts "Goodbye"
             sleep(1)
@@ -37,6 +37,7 @@ class Game
         end
     end
 
+    # welcome method to get user's name
     def welcome
         puts "Name please: "
         system('afplay angrywhatshanging.wav')
@@ -58,9 +59,12 @@ class Game
         system('clear')
     end
 
+    # guess method handles guess inputs from users and the logic behind wrong and right guesses
     def guess
         hangman = Hangman.new
+        # user can only make 6 mistakes before they lose
         while @mistakes < 6 do 
+            # keep track of the incorrect guesses in an array
             if @wrong_letters.length > 0
                 print "Wrong guesses: #{@wrong_letters.join(', ')}"
             end
@@ -71,7 +75,7 @@ class Game
                 if @guess.is_a? String     
                     @guess.upcase!
                 end
-
+                # check if user guess is a valid input
                 if @guess == ""
                     puts "You didn't enter anything. Try again:"
                 elsif !@guess.match(/\A[a-zA-Z0-9]*\z/)
@@ -86,7 +90,7 @@ class Game
                     break
                 end
             end
-            # check guess
+            # check if user guess is correct or not
             if @answer.chars.include?(@guess)
                 system('clear')
                 puts "You got a letter!"
@@ -105,6 +109,7 @@ class Game
                         "_"
                     end
                 end     
+                # check if this is the first guess
                 if @progress_array.length == 0
                     @progress_array = @array                    
                 else
@@ -115,9 +120,11 @@ class Game
                         @progress_array.insert(index, @guess)
                     end
                 end
+                # each character in answer is spaced
                 @array = @array.map do |x|
                     "#{x} "
                 end
+                # print the current progress of the user in a nice format
                 @progress_string = @progress_array.join(",").delete(",")    
                 i = 0
                 while i < @progress_string.length do
@@ -127,14 +134,17 @@ class Game
                 puts
                 hangman.draw(@mistakes)
             else
+                # handles incorrect guesses
                 system('clear')
                 puts "Uh-oh, hangman just got one stage closer:"
                 system ('afplay laugh.wav')
                 puts
                 @mistakes += 1
+                # display the hidden word, with the characters as underscores
                 if @progress_array.length == 0
                     puts @hidden_word
                 else
+                    # display the current progress of the user
                     @progress_string = @progress_array.join(",").delete(",")    
                     i = 0
                     while i < @progress_string.length do
@@ -142,17 +152,15 @@ class Game
                         i += 1                
                     end
                 end
-                # puts
-                # hangman.draw(@mistakes)
-                # puts
+                puts
+                hangman.draw(@mistakes)
+                puts
+                # when makes 6 mistakes the game ends
                 if @mistakes == 6
                     puts "The answer was #{@answer}"
                     system('afplay lose.wav')
                 end
                 @wrong_letters << @guess
-                puts
-                hangman.draw(@mistakes)
-                puts
             end
             # player wins once progress_array does not contain an underscore
             # and prevents them from winning upon initialization
