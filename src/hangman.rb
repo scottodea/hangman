@@ -2,8 +2,9 @@ class Hangman
     def initialize
         @mistakes = 0
     end
-
-    def draw(mistakes)
+                                                                              
+        def draw(mistakes)
+            puts
         if mistakes == 1
             i = 0
             while i < 6 do
@@ -47,15 +48,12 @@ class Hangman
         elsif mistakes == 6
             puts '  _______'
             puts '  |     |'
-            puts '  |     0'
-            puts '  |    _|_'
-            puts '  |     | '
-            puts '  |    / \ '
-            puts '  |       '
-            puts ' _________'
+            puts '  |     0          ____    ____  ______    __    __      __        ______        _______. _______ '
+            puts '  |    _|_         \   \  /   / /  __  \  |  |  |  |    |  |      /  __  \      /       ||   ____|'
+            puts '  |     |           \   \/   / |  |  |  | |  |  |  |    |  |     |  |  |  |    |   (----`|  |__   '
+            puts '  |    / \           \_    _/  |  |  |  | |  |  |  |    |  |     |  |  |  |     \   \    |   __| '
+            puts "  |                    |  |    |  `--'  | |  `--'  |    |  `----.|  `--'  | .----)   |   |  |____"
+            puts ' _________             |__|     \______/   \______/     |_______| \______/  |_______/    |_______|'
         end
     end
 end
-
-# hangman = Hangman.new
-# hangman.draw(6)
