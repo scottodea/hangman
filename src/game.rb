@@ -17,31 +17,29 @@ class Game
     end
 
     def start_game
+        system('clear')
         puts '  _______'.colorize(:red)
         puts' /   |   \_____    ____    ____   _____ _____    ____  '.colorize(:red)
         puts'/    ~    \__  \  /    \  / ___\ /     \ __  \  /    \ '.colorize(:red)
         puts'\    Y    // __ \|   |  \/ /_/  >  Y Y  \/ __ \|   |  \ '.colorize(:red)
         puts' \___|_  /(____  /___|  /\___  /|__|_|  (____  /___|  /'.colorize(:red)
         puts'       \/      \/     \//_____/       \/     \/     \/'.colorize(:red)
-        puts"Ready to play? Y/N"
-        response = gets.chomp.downcase
-        if response == "n"
-            puts "FINE!"
-            sleep(2)
-            abort
-        elsif
-          response == "y"
-          system('clear')
+        system ('afplay Start1.wav')
+        puts"Press enter to start or any key to quit"
+        system ('afplay angrywelcome.wav')
+        response = gets
+        if response == "\n"
+            
         else 
-        puts "I said to put Y or N!"
-        sleep(1)
-        abort
+            puts "Goodbye"
+            sleep(1)
+            abort
         end
     end
 
     def welcome
-        puts "Hey, What's Hangin?"
         puts "Name please: "
+        system('afplay angrywhatshanging.wav')
         while @name = gets.chomp
             system('clear')
             if @name.strip == ""
@@ -92,6 +90,7 @@ class Game
             if @answer.chars.include?(@guess)
                 system('clear')
                 puts "You got a letter!"
+                system ('afplay correct.wav')
                 puts
                 # convert the answer into a char array. place the correct guess in it's corresponding spot
                 # and replace all un-guessed chars with an underscore
@@ -130,16 +129,12 @@ class Game
             else
                 system('clear')
                 puts "Uh-oh, hangman just got one stage closer:"
+                system ('afplay laugh.wav')
                 puts
                 @mistakes += 1
                 if @progress_array.length == 0
                     puts @hidden_word
                 else
-                    # print "@progress array is: #{@progress_array}"
-                    # puts
-                    # print "@array is: #{@array}"
-                    # puts
-                    # @progress_array = @array
                     @progress_string = @progress_array.join(",").delete(",")    
                     i = 0
                     while i < @progress_string.length do
@@ -147,13 +142,17 @@ class Game
                         i += 1                
                     end
                 end
+                # puts
+                # hangman.draw(@mistakes)
+                # puts
+                if @mistakes == 6
+                    puts "The answer was #{@answer}"
+                    system('afplay lose.wav')
+                end
+                @wrong_letters << @guess
                 puts
                 hangman.draw(@mistakes)
                 puts
-                if @mistakes == 6
-                    puts "The answer was #{@answer}"
-                end
-                @wrong_letters << @guess
             end
             # player wins once progress_array does not contain an underscore
             # and prevents them from winning upon initialization
@@ -177,6 +176,7 @@ class Game
                 puts
                 puts
                 puts
+                system ('afplay win.wav')
                 break
             end
         end
@@ -185,7 +185,6 @@ end
 
 new_game = Game.new
 word = Word.new
-
 new_game.start_game
 new_game.welcome
 new_game.answer = word.pick_category(new_game.name)
