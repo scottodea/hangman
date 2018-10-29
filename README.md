@@ -52,7 +52,6 @@ Functionality
 - Correct guess screen
 ![Correct guess](https://github.com/ginodleon/hangman/blob/master/docs/5correct.png)
 
-
 - Incorrect guess screen
 ![Incorrect guess](https://github.com/ginodleon/hangman/blob/master/docs/6wrong.png)
 
