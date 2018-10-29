@@ -58,7 +58,6 @@ Functionality
 - Winning screen
 ![Win screen](https://github.com/ginodleon/hangman/blob/master/docs/7win.png)
 
-
 - Gameover screen
 ![Lose screen](https://github.com/ginodleon/hangman/blob/master/docs/8lose.png)
 
