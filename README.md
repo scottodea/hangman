@@ -49,7 +49,6 @@ Functionality
 - Guessing a character
 ![Enter a guess](https://github.com/ginodleon/hangman/blob/master/docs/4guess.png)
 
-
 - Correct guess screen
 ![Correct guess](https://github.com/ginodleon/hangman/blob/master/docs/5correct.png)
 
